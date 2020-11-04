@@ -1,5 +1,5 @@
 <template>
-  <f7-app :params="f7params" >
+  <f7-app v-bind="f7params" >
 
   <!-- Left panel with cover effect-->
   <f7-panel left cover theme-dark>
@@ -69,15 +69,13 @@
               type="text"
               name="username"
               placeholder="Your username"
-              :value="username"
-              @input="username = $event.target.value"
+              v-model:value="username"
             ></f7-list-input>
             <f7-list-input
               type="password"
               name="password"
               placeholder="Your password"
-              :value="password"
-              @input="password = $event.target.value"
+              v-model:value="password"
             ></f7-list-input>
           </f7-list>
           <f7-list>
@@ -92,62 +90,45 @@
   </f7-app>
 </template>
 <script>
-
+  import { ref, onMounted } from 'vue';
+  import { f7, f7ready } from 'framework7-vue';
   import routes from '../js/routes.js';
+  import { store } from '../js/store.js';
 
   export default {
-    data() {
+    setup() {
+      const username = ref('');
+      const password = ref('');
+
+      const alertLoginData = () => {
+        f7.dialog.alert('Username: ' + username.value + '<br>Password: ' + password.value, () => {
+          f7.loginScreen.close();
+        });
+      }
+
+      onMounted(() => {
+        // Call F7 APIs here
+      })
+
       return {
         // Framework7 Parameters
         f7params: {
           name: 'My App', // App name
           theme: 'auto', // Automatic theme detection
 
-          // App root data
-          data: function () {
-            return {
-
-              // Demo products for Catalog section
-              products: [
-                {
-                  id: '1',
-                  title: 'Apple iPhone 8',
-                  description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi tempora similique reiciendis, error nesciunt vero, blanditiis pariatur dolor, minima sed sapiente rerum, dolorem corrupti hic modi praesentium unde saepe perspiciatis.'
-                },
-                {
-                  id: '2',
-                  title: 'Apple iPhone 8 Plus',
-                  description: 'Velit odit autem modi saepe ratione totam minus, aperiam, labore quia provident temporibus quasi est ut aliquid blanditiis beatae suscipit odio vel! Nostrum porro sunt sint eveniet maiores, dolorem itaque!'
-                },
-                {
-                  id: '3',
-                  title: 'Apple iPhone X',
-                  description: 'Expedita sequi perferendis quod illum pariatur aliquam, alias laboriosam! Vero blanditiis placeat, mollitia necessitatibus reprehenderit. Labore dolores amet quos, accusamus earum asperiores officiis assumenda optio architecto quia neque, quae eum.'
-                },
-              ]
-            };
-          },
-
           // App routes
-          routes: routes,
+          routes,
+
+          // Store
+          store,
         },
         // Login screen data
-        username: '',
-        password: '',
-      }
-    },
-    methods: {
-      alertLoginData() {
-        this.$f7.dialog.alert('Username: ' + this.username + '<br>Password: ' + this.password, () => {
-          this.$f7.loginScreen.close();
-        });
-      }
-    },
-    mounted() {
-      this.$f7ready((f7) => {
+        username,
+        password,
 
-        // Call F7 APIs here
-      });
-    }
+        // methods
+        alertLoginData,
+      }
+    },
   }
 </script>

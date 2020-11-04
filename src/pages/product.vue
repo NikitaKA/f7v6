@@ -8,11 +8,15 @@
   </f7-page>
 </template>
 <script>
+  import { store } from '../js/store';
   export default {
-    data: function () {
-      var productId = this.$f7route.params.id;
+    props: {
+      f7route: Object,
+    },
+    setup(props) {
+      var productId = props.f7route.params.id;
       var currentProduct;
-      this.$f7.data.products.forEach(function (product) {
+      store.state.products.forEach(function (product) {
         if (product.id === productId) {
           currentProduct = product;
         }

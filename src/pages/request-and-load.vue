@@ -18,9 +18,12 @@
 </template>
 <script>
   export default {
-    data() {
+    props: {
+      user: Object,
+    },
+    setup(props) {
       return {
-        user: this.$f7route.context.user,
+        user: props.user,
       }
     }
   }

@@ -21,12 +21,11 @@
     "Samsung >= 5"
   ],
   "dependencies": {
-    "dom7": "^2.1.5",
-    "framework7": "^5.7.13",
+    "@vue/compiler-sfc": "^3.0.2",
+    "framework7": "^6.0.0-alpha.17",
     "framework7-icons": "^3.0.1",
-    "framework7-vue": "^5.7.13",
-    "template7": "^1.4.2",
-    "vue": "^2.6.12"
+    "framework7-vue": "^6.0.0-alpha.17",
+    "vue": "^3.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
@@ -53,7 +52,7 @@
     "style-loader": "^2.0.0",
     "terser-webpack-plugin": "^4.2.3",
     "url-loader": "^4.1.1",
-    "vue-loader": "^15.9.5",
+    "vue-loader": "^16.0.0-beta.10",
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.6.12",
     "webpack": "^4.44.2",
